@@ -1,8 +1,6 @@
 import java.util.Scanner;
 
 public class Solution6 {
-    public static int[][] resultMatrix;
-
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
@@ -17,9 +15,7 @@ public class Solution6 {
             }
         }
 
-        resultMatrix = new int[matrixLength][matrixLength];
-
-        powerMatrix(matrix, matrix, matrixPowerCount);
+        int[][] resultMatrix = powerMatrix(matrix, matrix, matrixPowerCount);
 
         for (int i = 0; i < resultMatrix.length; i++) {
             for (int j = 0; j < resultMatrix[i].length; j++) {
@@ -36,9 +32,10 @@ public class Solution6 {
         if (n <= 1)
             return matrixA;
         else {
+            int[][] resultMatrix = new int[matrixA.length][matrixA.length];
 
-            for (int i = 0; i < matrixA.length; i++) {
-                for (int j = 0; j < matrixA.length; j++) {
+            for (int i = 0; i < resultMatrix.length; i++) {
+                for (int j = 0; j < resultMatrix.length; j++) {
                     int sum = 0;
                     for (int k = 0; k < matrixA[i].length; k++)
                         sum += matrixA[i][k] * matrixB[k][j];
@@ -46,7 +43,6 @@ public class Solution6 {
                     resultMatrix[i][j] = sum % 1000;
                 }
             }
-
             return powerMatrix(resultMatrix, matrixB, n - 1);
         }
     }

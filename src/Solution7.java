@@ -1,4 +1,3 @@
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Solution7 {
@@ -7,34 +6,43 @@ public class Solution7 {
 
         int testCase = scanner.nextInt();
 
-        int[][] passwordArr = new int[testCase][2];
+        int[][] pairTestCase = new int[testCase][2];
 
         for (int i = 0; i < testCase; i++) {
-            passwordArr[i][0] = scanner.nextInt();
-            passwordArr[i][1] = scanner.nextInt();
+            pairTestCase[i][0] = scanner.nextInt();
+            pairTestCase[i][1] = scanner.nextInt();
         }
 
-        for (int[] password : passwordArr)
-            checkChangePasswordStep(password);
+        for (int[] ints : pairTestCase) {
+            printAllPrimaryNumber(ints);
+//            int count = countPrimaryNumberChangeStep(ints);
+//            if (count != -1)
+//                System.out.println(count);
+//            else
+//                System.out.println("Impossible");
+        }
     }
 
-    private static void checkChangePasswordStep(int[] password) {
-        int step = 0;
-        int beforePassword = password[0];
-
-        do {
-            //바로 변경한다
-
-            if (isPrimeNumber())
-                step++;
-
-            //불가능한 경우 System.out.println("Impossible")
-        } while (beforePassword == password[2]);
-
-        System.out.println(step);
+    private static void printAllPrimaryNumber(int[] primaryPair) {
+        for (int i = Math.min(primaryPair[0], primaryPair[1]); i < Math.max(primaryPair[0], primaryPair[1]); i++) {
+            if (isPrimaryNumber(i))
+                System.out.println(i);
+        }
     }
 
-    private static boolean isPrimeNumber() {
-        return false;
+    private static boolean isPrimaryNumber(int number) {
+        for (int i = 2; i < number; i++) {
+            if(number % i == 0)
+                return false;
+        }
+
+        return true;
     }
+
+    private static int countPrimaryNumberChangeStep(int[] primaryPair) {
+
+        return 0;
+    }
+
+
 }

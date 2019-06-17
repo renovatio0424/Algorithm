@@ -1,3 +1,5 @@
+package basic;
+
 class Tree {
     private Node root;
 

@@ -1,4 +1,5 @@
-import java.util.ArrayList;
+package basic;
+
 import java.util.HashMap;
 import java.util.Scanner;
 

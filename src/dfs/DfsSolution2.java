@@ -31,15 +31,34 @@ public class DfsSolution2 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int testCase = scanner.nextInt();
+        scanner.nextLine();
 
         for (int i = 0; i < testCase; i++) {
-            countGoodVoca(scanner.nextLine());
+            if (isGoodVoca(scanner.nextLine()))
+                goodVoceCount++;
         }
 
         System.out.println(goodVoceCount + "");
     }
 
-    private static void countGoodVoca(String voca) {
+    /*
+     * 1. 첫번째 글자와 같은 글자의 위치를 찾는다
+     * 2. 첫번째 글자와 같은 글자 사이의 글자들이 모두 짝이라면 좋은 글자이다
+     * */
 
+    private static boolean isGoodVoca(String voca) {
+        if(voca.equals(""))
+            return false;
+        int sameIdx = voca.indexOf(voca.charAt(0));
+
+        if(voca.length() <= 2){
+            return voca.charAt(0) == voca.charAt(1);
+        }
+
+        if (sameIdx != voca.length() - 1) {
+            return isGoodVoca(voca.substring(0,sameIdx)) && isGoodVoca(voca.substring(sameIdx + 1));
+        } else {
+            return isGoodVoca(voca);
+        }
     }
 }

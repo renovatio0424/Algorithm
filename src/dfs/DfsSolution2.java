@@ -26,20 +26,45 @@ import java.util.Scanner;
  */
 public class DfsSolution2 {
 
-    private static int goodVoceCount = 0;
+    private static int goodVocaCount = 0;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         Scanner scanner = new Scanner(System.in);
         int testCase = scanner.nextInt();
+        scanner.nextLine();
 
         for (int i = 0; i < testCase; i++) {
-            countGoodVoca(scanner.nextLine());
+            if (isGoodVoca(scanner.nextLine()))
+                goodVocaCount++;
+
         }
 
-        System.out.println(goodVoceCount + "");
+        System.out.println(goodVocaCount + "");
     }
 
-    private static void countGoodVoca(String voca) {
+    private static boolean isGoodVoca(String voca) throws Exception {
+        if (voca.length() < 1)
+            return false;
 
+        if (voca.length() == 2) {
+            return voca.charAt(0) == voca.charAt(1);
+        }
+
+        int sameIndex = voca.substring(1).indexOf(voca.charAt(0)) + 1;
+
+        if(sameIndex == 0)
+            return false;
+
+        //첫글자와 같은 글자가 바로 옆에 있을때
+        if (sameIndex == 1)
+            return isGoodVoca(voca.substring(2));
+        //첫글자랑 같은 글자가 마지막 글자가 아닐때
+        else if (sameIndex != voca.length() - 1)
+            //첫글자와 같은 글자 사이의 문자열이 좋은 단어 이면서 나머지 문자열이 좋은 단어이면 좋은 단어이다.
+            return isGoodVoca(voca.substring(1, sameIndex - 1)) && isGoodVoca(voca.substring(sameIndex + 1));
+        //첫글자랑 같은 글자가 마지막 글자일때
+        else
+            return isGoodVoca(voca.substring(1, sameIndex));
     }
+
 }

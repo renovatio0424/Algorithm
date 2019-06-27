@@ -33,10 +33,12 @@ public class BfsSolution6 {
         map = new int[N + 1][M + 1];
         moveCount = new HashMap<>();
 
+        scanner.nextLine();
+
         for (int i = 0; i < N; i++) {
-            String mapLine = String.format("%0" + M + "d", scanner.nextInt());
+            String mapLine = scanner.nextLine();//String.format("%0" + M + "d", scanner.nextInt());
             for (int j = 0; j < M; j++) {
-                map[i][j] = mapLine.charAt(j) - 48;
+                map[i][j] = mapLine.charAt(j) - '0';
             }
         }
 
@@ -61,7 +63,7 @@ public class BfsSolution6 {
         Position start = new Position(1, 1);
         Position end = new Position(N, M);
         queue.add(start);
-        moveCount.put(start, 0);
+        moveCount.put(start, 1);
 
         while (!queue.isEmpty()) {
             Position currentPosition = queue.poll();
@@ -78,9 +80,9 @@ public class BfsSolution6 {
                     new Position(currentPosition.x, currentPosition.y + 1)
             };
             for (Position nextPosition : nextPositionArr) {
-                if (nextPosition.x < 0 || nextPosition.x > N || nextPosition.y < 0 || nextPosition.y > M) continue;
+                if (nextPosition.x < 1 || nextPosition.x > N || nextPosition.y < 1 || nextPosition.y > M) continue;
 
-                if(map[nextPosition.x][nextPosition.y] == 1 && !moveCount.containsKey(nextPosition)){
+                if(map[nextPosition.x - 1][nextPosition.y - 1] == 1 && !isVisitedPosition(nextPosition)){
                     queue.add(nextPosition);
                     int currentCount = moveCount.get(currentPosition);
                     moveCount.put(nextPosition, currentCount + 1);
@@ -89,5 +91,14 @@ public class BfsSolution6 {
         }
 
         System.out.print("NO");
+    }
+
+    private static boolean isVisitedPosition(Position position) {
+        for (Position visitedPosition : moveCount.keySet()){
+            if(visitedPosition.isEqualPosition(position))
+                return true;
+        }
+
+        return false;
     }
 }

@@ -159,24 +159,12 @@ public class BfsSolution7 {
     }
 
     static class Position {
-        /*
-        1 : 익은 상태
-        0 : 덜 익은 상태
-        -1 : 썩은 상태
-        */
+
         int x, y;
 
         Position(int x, int y){
             this.x = x;
             this.y = y;
-        }
-
-        public int getX() {
-            return x;
-        }
-
-        public int getY() {
-            return y;
         }
 
         boolean isEqualPosition(Position position) {

@@ -2,6 +2,7 @@ package dfs;
 
 
 import java.util.Scanner;
+import java.util.Stack;
 
 /**
  * 좋은 단어
@@ -22,7 +23,12 @@ import java.util.Scanner;
  * <p>
  * 첫째 줄에 좋은 단어의 수를 출력한다.
  * <p>
- * https://www.acmicpc.net/problem/3986
+ * 3
+ * ABAB
+ * AABB
+ * ABBA
+ * <p>
+ * 2
  */
 public class DfsSolution2 {
 
@@ -44,21 +50,25 @@ public class DfsSolution2 {
     /*
      * 1. 첫번째 글자와 같은 글자의 위치를 찾는다
      * 2. 첫번째 글자와 같은 글자 사이의 글자들이 모두 짝이라면 좋은 글자이다
+     * 아닐수도 있다.
+     *
+     *앞에서 부터 하나하나
      * */
 
     private static boolean isGoodVoca(String voca) {
-        if(voca.equals(""))
-            return false;
-        int sameIdx = voca.indexOf(voca.charAt(0));
+        Stack<Character> visited = new Stack<>();
 
-        if(voca.length() <= 2){
-            return voca.charAt(0) == voca.charAt(1);
+        visited.push(voca.charAt(0));
+
+        for (int i = 1; i < voca.length(); i++) {
+            if (visited.size() == 0)
+                visited.push(voca.charAt(i));
+            else if(visited.peek() == voca.charAt(i))
+                visited.pop();
+            else
+                visited.push(voca.charAt(i));
         }
 
-        if (sameIdx != voca.length() - 1) {
-            return isGoodVoca(voca.substring(0,sameIdx)) && isGoodVoca(voca.substring(sameIdx + 1));
-        } else {
-            return isGoodVoca(voca);
-        }
+        return visited.size() == 0;
     }
 }

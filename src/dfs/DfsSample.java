@@ -25,6 +25,7 @@ public class DfsSample {
         System.out.print(cur + " ");
         visited[cur] = true;
         for(int i = 1; i <= N; i++)
-            if(adj[cur][i] && !visited[i]) printDFS(i);
+            if(adj[cur][i] && !visited[i])
+                printDFS(i);
     }
 }

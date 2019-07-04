@@ -26,43 +26,41 @@ output
 package dfs;
 
 import java.util.Scanner;
+import java.util.Stack;
 
 public class DfsSolution3 {
     private static String bracketString;
-    private static boolean[] visitedString;
+    private static Stack<Character> charStack;
+    private static Stack<Integer> sumStack;
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         String bracketString = scanner.nextLine();
-        visitedString = new boolean[bracketString.length()];
+        charStack = new Stack<>();
 
         System.out.println(calculateBracket(0));
     }
-
+    // ((, (), ([, (]
+    // [[, [], [(, [)
+    // )), )(, )[, )]
+    // ]], ][, ](, ])
     private static int calculateBracket(int start) {
-        visitedString[start] = true;
+        //스택에 채운다
+        charStack.push(bracketString.charAt(start));
 
-        String remain = bracketString.substring(start, start + 2);
+        char currentChar = charStack.peek();
 
-        if (remain.equals("()")){
+        if(currentChar == '(' && bracketString.charAt(start + 1) == ')'){
             return 2;
-        }
-        else if (remain.equals("[]")){
+        } else if(currentChar == '[' && bracketString.charAt(start + 1) == ']'){
             return 3;
         }
 
-        int sum = 0;
-
-        for (int i = start; i < bracketString.length(); i++) {
-            if(!visitedString[i])
-
-            if (bracketString.charAt(start) == '(' && (!visitedString[i] && bracketString.charAt(i) == ')')) {
-                sum += 2 * calculateBracket(i);
-            } else if (!visitedString[i] && bracketString.charAt(i) == '[') {
-                sum += 3 * innerBracket;
-            }
-        }
-
-        return sum;
+        calculateBracket(start + 1);
+        return 0;
     }
+
+//    private static boolean isVisitedString(int idx) {
+//        return visitedString[idx] != '\u0000'; //default value
+//    }
 }

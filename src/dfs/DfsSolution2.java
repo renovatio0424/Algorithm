@@ -2,7 +2,6 @@ package dfs;
 
 
 import java.util.Scanner;
-import java.util.Stack;
 
 /**
  * 좋은 단어
@@ -23,6 +22,7 @@ import java.util.Stack;
  * <p>
  * 첫째 줄에 좋은 단어의 수를 출력한다.
  * <p>
+ * https://www.acmicpc.net/problem/3986
  * 3
  * ABAB
  * AABB
@@ -32,21 +32,21 @@ import java.util.Stack;
  */
 public class DfsSolution2 {
 
-    private static int goodVoceCount = 0;
+    private static int goodVocaCount = 0;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         Scanner scanner = new Scanner(System.in);
         int testCase = scanner.nextInt();
         scanner.nextLine();
 
         for (int i = 0; i < testCase; i++) {
             if (isGoodVoca(scanner.nextLine()))
-                goodVoceCount++;
+                goodVocaCount++;
+
         }
 
-        System.out.println(goodVoceCount + "");
+        System.out.println(goodVocaCount + "");
     }
-
     /*
      * 1. 첫번째 글자와 같은 글자의 위치를 찾는다
      * 2. 첫번째 글자와 같은 글자 사이의 글자들이 모두 짝이라면 좋은 글자이다
@@ -55,20 +55,28 @@ public class DfsSolution2 {
      *앞에서 부터 하나하나
      * */
 
-    private static boolean isGoodVoca(String voca) {
-        Stack<Character> visited = new Stack<>();
+    private static boolean isGoodVoca(String voca) throws Exception {
+        if (voca.length() < 1)
+            return false;
 
-        visited.push(voca.charAt(0));
-
-        for (int i = 1; i < voca.length(); i++) {
-            if (visited.size() == 0)
-                visited.push(voca.charAt(i));
-            else if(visited.peek() == voca.charAt(i))
-                visited.pop();
-            else
-                visited.push(voca.charAt(i));
+        if (voca.length() == 2) {
+            return voca.charAt(0) == voca.charAt(1);
         }
 
-        return visited.size() == 0;
+        int sameIndex = voca.substring(1).indexOf(voca.charAt(0)) + 1;
+
+        if(sameIndex == 0)
+            return false;
+
+        //첫글자와 같은 글자가 바로 옆에 있을때
+        if (sameIndex == 1)
+            return isGoodVoca(voca.substring(2));
+        //첫글자랑 같은 글자가 마지막 글자가 아닐때
+        else if (sameIndex != voca.length() - 1)
+            //첫글자와 같은 글자 사이의 문자열이 좋은 단어 이면서 나머지 문자열이 좋은 단어이면 좋은 단어이다.
+            return isGoodVoca(voca.substring(1, sameIndex - 1)) && isGoodVoca(voca.substring(sameIndex + 1));
+        //첫글자랑 같은 글자가 마지막 글자일때
+        else
+            return isGoodVoca(voca.substring(1, sameIndex));
     }
 }

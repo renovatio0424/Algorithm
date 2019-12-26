@@ -1,8 +1,9 @@
 package bfs;
 
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Scanner;
 
 /**
@@ -15,69 +16,56 @@ import java.util.Scanner;
  * <p>
  * 여러 사람들에 대한 부모 자식들 간의 관계가 주어졌을 때, 주어진 두 사람의 촌수를 계산하는 프로그램을 작성하시오.
  * <p>
- * 깊이 탐색 -> dfs
+ * bfs
  */
 public class BfsSolution4 {
-
-    private static HashMap<Integer, ArrayList<Integer>> personRelation;
+    private static boolean[][] personRelation;
+    private static int[] visited;
+    private static int totalPeopleCount;
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        int totalPeopleCount = scanner.nextInt();
+        totalPeopleCount = scanner.nextInt();
         int person1 = scanner.nextInt();
         int person2 = scanner.nextInt();
 
         int relationCount = scanner.nextInt();
-        personRelation = new HashMap<>();
+        personRelation = new boolean[totalPeopleCount + 1][totalPeopleCount + 1];
+        visited = new int[totalPeopleCount + 1];
 
         for (int i = 0; i < relationCount; i++) {
-            int me = scanner.nextInt();
+            int parent = scanner.nextInt();
             int child = scanner.nextInt();
-            if (personRelation.containsKey(me))
-                personRelation.get(me).add(child);
-            else {
-                ArrayList<Integer> childList = new ArrayList<>();
-                childList.add(child);
-                personRelation.put(me, childList);
-            }
+            personRelation[parent][child] = personRelation[child][parent] = true;
         }
 
         countPersonNumber(person1, person2);
     }
 
-    private static void countPersonNumber(int person1, int person2) {
-        //촌수
-        int personNumber = 0;
-        //누군가의 부모라면
-//        if(personRelation.containsKey(person1))
-    }
+    private static void countPersonNumber(int start, int end) {
+        Arrays.fill(visited, -1);
 
-    static class Person {
-        int myNumber;
-        Person parent;
-        ArrayList<Person> children;
-        boolean visited = false;
+        Queue<Integer> visitedQueue = new LinkedList<>();
 
-        Person(int myNumber) {
-            this.myNumber = myNumber;
+        visitedQueue.add(start);
+        visited[start] = 0;
+
+        while (!visitedQueue.isEmpty()) {
+            int current = visitedQueue.poll();
+
+            if (current == end) {
+                System.out.print(visited[current]);
+                return;
+            }
+
+            for (int i = 1; i <= totalPeopleCount; i++) {
+                if (personRelation[current][i] && visited[i] == -1) {
+                    visitedQueue.add(i);
+                    visited[i] = visited[current] + 1;
+                }
+            }
         }
 
-        public void setParent(Person parent) {
-            this.parent = parent;
-        }
-
-        public Person getParent() {
-            return parent;
-        }
-
-        public void addChildren(Person child) {
-            if (children == null)
-                children = new ArrayList<>();
-            this.children.add(child);
-        }
-
-        public ArrayList<Person> getChildren() {
-            return children;
-        }
+        System.out.print(-1);
     }
 }

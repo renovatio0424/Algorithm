@@ -13,20 +13,19 @@ import java.util.Scanner;
  * 1을 뺀다.
  * 정수 N이 주어졌을 때, 위와 같은 연산 세 개를 적절히 사용해서 1을 만들려고 한다. 연산을 사용하는 횟수의 최솟값을 출력하시오.
  * <p>
- *
+ * <p>
  * input
  * 첫째 줄에 1보다 크거나 같고, 10^6보다 작거나 같은 정수 N이 주어진다.
- *
+ * <p>
  * output
  * 첫째 줄에 연산을 하는 횟수의 최솟값을 출력한다.
- *
+ * <p>
  * example
  * 2 -> 1
  * 10 -> 3
  */
 public class MakeOne {
     private static int N;
-    private static int[] timeList = new int[1000001];
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -37,30 +36,55 @@ public class MakeOne {
     }
 
     private static int makeOne(int n) {
-        Queue<Integer> divideValueQue = new LinkedList<>();
-        divideValueQue.add(n);
+        if (n == 1)
+            return 0;
+
+        Queue<Pair> divideValueQue = new LinkedList<>();
+        divideValueQue.add(new Pair(n, 0));
 
         while (!divideValueQue.isEmpty()) {
-            int currentValue = divideValueQue.poll();
+            Pair currentPair = divideValueQue.poll();
+            int currentValue = currentPair.value;
 
             if (currentValue == 1) {
-                return timeList[currentValue] - 1;
+                return currentPair.operatingCount;
             }
 
             int nextValue;
 
             if (currentValue % 3 == 0) {
                 nextValue = currentValue / 3;
-            } else if (currentValue % 2 == 0) {
-                nextValue = currentValue / 2;
-            } else {
-                nextValue = currentValue - 1;
+                divideValueQue.add(new Pair(nextValue, currentPair.operatingCount + 1));
             }
-            divideValueQue.add(nextValue);
-            timeList[nextValue] = timeList[currentValue] + 1;
+
+            if (currentValue % 2 == 0) {
+                nextValue = currentValue / 2;
+                divideValueQue.add(new Pair(nextValue, currentPair.operatingCount + 1));
+            }
+
+            nextValue = currentValue - 1;
+            divideValueQue.add(new Pair(nextValue, currentPair.operatingCount + 1));
 
         }
 
         return -1;
+    }
+
+    static class Pair {
+        private int value = 0;
+        private int operatingCount = 0;
+
+        Pair(int value, int operatingCount) {
+            this.value = value;
+            this.operatingCount = operatingCount;
+        }
+
+        public int getValue() {
+            return value;
+        }
+
+        public int getOperatingCount() {
+            return operatingCount;
+        }
     }
 }

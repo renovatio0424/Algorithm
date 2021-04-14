@@ -1,10 +1,19 @@
 package programmers.kakao19;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 
+/**
+ *  @link https://programmers.co.kr/learn/courses/30/lessons/64061
+ */
 public class PickDolls {
+    // 4
+    // 3
+    // 1
+    // 1
+    // 3
+    // 2
+    //
+    // 4
     public static void main(String[] args) {
         int[][] board = new int[][]{
                 {0, 0, 0, 0, 0},
@@ -21,29 +30,28 @@ public class PickDolls {
     }
 
     private static int solution(int[][] board, int[] moves) {
-        List<Stack<Integer>> boardStackList = intArrayToStackList(board);
-        int result = getBoomDolls(boardStackList, moves);
-        return result;
+        List<Queue<Integer>> boardStackList = intArrayToQueueList(board);
+        return getBoomDolls(boardStackList, moves);
     }
 
-    private static int getBoomDolls(List<Stack<Integer>> boardStackList, int[] moves) {
+    private static int getBoomDolls(List<Queue<Integer>> boardStackList, int[] moves) {
         Stack<Integer> pickDollStack = new Stack<>();
         int boomCount = 0;
 
         for (int moveIdx : moves) {
-            Stack<Integer> stackBoard = boardStackList.get(moveIdx - 1);
+            Queue<Integer> queueBoard = boardStackList.get(moveIdx - 1);
 
-            if (stackBoard.isEmpty())
+            if (queueBoard.isEmpty())
                 continue;
 
-            while (!stackBoard.isEmpty() && stackBoard.peek() == 0) {
-                stackBoard.pop();
+            while (!queueBoard.isEmpty() && queueBoard.peek() == 0) {
+                queueBoard.poll();
             }
 
-            if (stackBoard.isEmpty())
+            if (queueBoard.isEmpty())
                 continue;
 
-            int nonZeroDoll = stackBoard.pop();
+            int nonZeroDoll = queueBoard.poll();
 
             if (pickDollStack.isEmpty() || pickDollStack.peek() != nonZeroDoll) {
                 pickDollStack.push(nonZeroDoll);
@@ -56,22 +64,21 @@ public class PickDolls {
             }
         }
 
-        return boomCount;
+        return boomCount * 2;
     }
 
-    private static List<Stack<Integer>> intArrayToStackList(int[][] board) {
-        List<Stack<Integer>> result = new ArrayList<>();
+    private static List<Queue<Integer>> intArrayToQueueList(int[][] board) {
+        List<Queue<Integer>> result = new ArrayList<>();
 
         for (int i = 0; i < board.length; i++) {
-            for (int j = 0; j < board[i].length; i++) {
-                Stack<Integer> boardStack = result.get(j);
-
-                if (result.get(j) == null) {
-                    boardStack = new Stack<>();
-                    result.add(boardStack);
+            for (int j = 0; j < board[i].length; j++) {
+                Queue<Integer> boardQueue;
+                if (i == 0) {
+                    boardQueue = new LinkedList<>();
+                    result.add(boardQueue);
                 }
-
-                boardStack.push(board[i][j]);
+                boardQueue = result.get(j);
+                boardQueue.add(board[i][j]);
             }
         }
 

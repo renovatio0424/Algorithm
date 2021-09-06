@@ -11,7 +11,7 @@ public class PickDolls {
     // 1
     // 1
     // 3
-    // 2
+    //
     //
     // 4
     public static void main(String[] args) {

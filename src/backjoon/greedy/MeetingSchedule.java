@@ -44,8 +44,10 @@ public class MeetingSchedule {
         });
 
         for (int[] schedule : originalScheduleList) {
-            if (scheduleList.size() == 0)
+            if (scheduleList.size() == 0) {
                 scheduleList.add(schedule);
+                continue;
+            }
 
             int[] lastSchedule = scheduleList.get(scheduleList.size() - 1);
             if (lastSchedule[1] <= schedule[0]) {

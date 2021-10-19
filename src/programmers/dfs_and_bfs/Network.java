@@ -1,4 +1,4 @@
-package programmers.dfs;
+package programmers.dfs_and_bfs;
 
 // 문제 설명
 // 네트워크란 컴퓨터 상호 간에 정보를 교환할 수 있도록 연결된 형태를 의미합니다. 예를 들어, 컴퓨터 A와 컴퓨터 B가 직접적으로 연결되어있고,

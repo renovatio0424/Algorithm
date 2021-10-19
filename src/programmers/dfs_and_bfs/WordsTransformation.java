@@ -1,4 +1,4 @@
-package programmers.bfs;
+package programmers.dfs_and_bfs;
 
 import java.util.*;
 

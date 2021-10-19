@@ -1,4 +1,4 @@
-package programmers.dfs;
+package programmers.dfs_and_bfs;
 
 public class Factorial {
     public static void main(String[] args) {

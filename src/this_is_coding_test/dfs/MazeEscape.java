@@ -30,12 +30,11 @@ public class MazeEscape {
         Queue<Point> pointQueue = new LinkedList<>();
         pointQueue.offer(new Point(0, 0));
         visited[0][0] = true;
-
         int[][] moveArr = new int[][]{
-                {1, 0},
-                {0, 1},
-                {-1, 0},
-                {0, -1}
+                {1, 0},//우
+                {0, 1},//상
+                {-1, 0},//좌
+                {0, -1}//하
         };
         Point end = new Point(5, 4);
 

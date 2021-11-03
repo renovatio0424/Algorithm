@@ -34,14 +34,14 @@ public class DisjointSets {
             unionParent(a, b);
         }
 
-        System.out.println("각 우너소가 속한 집합: ");
+        System.out.println("각 원소가 속한 집합: ");
         for (int i = 1; i <= v; i++) {
-            System.out.println(findParent(i) + " ");
+            System.out.print(findParent(i) + " ");
         }
         System.out.println();
-        System.out.print("부모 테이블: ");
+        System.out.println("부모 테이블: ");
         for (int i = 1; i <= v; i++) {
-            System.out.println(parent[i] + " ");
+            System.out.print(parent[i] + " ");
         }
         System.out.println();
     }

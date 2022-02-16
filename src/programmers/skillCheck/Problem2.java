@@ -15,10 +15,10 @@ public class Problem2 {
     private static int[] solution(int n, int m) {
         int[] result = new int[2];
 
-        int gcm = gcd(n, m);
-        int lcm = lcm(n, m, gcm);
+        int gcd = gcd(n, m);
+        int lcm = lcm(n, m, gcd);
 
-        result[0] = gcm;
+        result[0] = gcd;
         result[1] = lcm;
 
         return result;

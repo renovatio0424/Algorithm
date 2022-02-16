@@ -2,6 +2,7 @@ package programmers.study;
 
 import java.util.Stack;
 
+//https://programmers.co.kr/learn/courses/30/lessons/81303
 public class EditTable {
     public static void main(String[] args) {
         int n = 8;

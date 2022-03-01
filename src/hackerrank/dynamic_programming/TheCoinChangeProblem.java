@@ -25,7 +25,7 @@ public class TheCoinChangeProblem {
 
         // Print the number of ways of making change for 'n' units using coins having the values given by 'c'
 
-        long ways = getWays(n, c);
+        long ways = getWays2(n, c);
 
         System.out.println(ways);
     }

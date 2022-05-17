@@ -2,8 +2,8 @@ package programmers.dfs_and_bfs;
 
 public class GCD {
     public static void main(String[] args) {
-        int a = 192;
-        int b = 162;
+        int a = 13;
+        int b = 9;
 
         int result = gcd(a, b);
 

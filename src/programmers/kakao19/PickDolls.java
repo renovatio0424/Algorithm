@@ -26,6 +26,7 @@ public class PickDolls {
         int[] moves = new int[]{1, 5, 3, 5, 1, 2, 1, 4};
 
         int result = solution(board, moves);
+        int hello = Integer.parseInt("123");
         System.out.println("result: " + result);
     }
 

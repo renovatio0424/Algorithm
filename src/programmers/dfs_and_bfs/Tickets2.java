@@ -8,11 +8,9 @@ import java.util.Comparator;
 public class Tickets2 {
     public static void main(String[] args) {
         String[][] tickets = new String[][]{
-//                {"ICN", "JFK"}, {"HND", "IAD"}, {"JFK", "HND"}
+                {"ICN", "JFK"}, {"HND", "IAD"}, {"JFK", "HND"}
 //                {"ICN", "SFO"}, {"ICN", "ATL"}, {"SFO", "ATL"}, {"ATL", "ICN"}, {"ATL","SFO"}
-                {"ICN", "ATL"}, {"ICN", "JFK"}, {"JFK", "ICN"}
-
-
+//                {"ICN", "ATL"}, {"ICN", "JFK"}, {"JFK", "ICN"}
         };
 
         String[] result = solution(tickets);

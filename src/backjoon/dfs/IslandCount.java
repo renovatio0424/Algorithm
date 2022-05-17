@@ -1,6 +1,7 @@
 package backjoon.dfs;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 import java.util.Stack;
 
@@ -85,6 +86,10 @@ public class IslandCount {
 
                 pointStack.push(movePoint);
             }
+
+            ArrayList<Integer> list = new ArrayList<>();
+            list.add(1);
+            System.out.println(list);
         }
     }
 

@@ -72,10 +72,10 @@ class MatrixRotatorImpl implements MatrixRotator {
         int endX = end[0] - 1;
         int endY = end[1] - 1;
 
-        //top
         int prev = matrix[startY][startX];
         int min = prev;
 
+        //top
         for (int x = startX + 1; x <= endX; x++) {
             prev = move(x, startY, prev);
             min = Math.min(min, prev);

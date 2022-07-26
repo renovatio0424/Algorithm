@@ -1,4 +1,4 @@
-package programmers.monthlyChallenge;
+package programmers.monthly_code_challenge1;
 
 /**
  * @link: https://programmers.co.kr/learn/courses/30/lessons/76501

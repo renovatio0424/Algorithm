@@ -1,4 +1,4 @@
-package programmers.monthlyChallenge;
+package programmers.monthly_code_challenge1;
 
 import java.util.Stack;
 
